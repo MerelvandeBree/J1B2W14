@@ -1,0 +1,29 @@
+#container {
+	text-align: center;
+	width: 500px;
+	margin: 0px auto;
+	padding: 20px;
+	background-color: white;
+}
+
+#bgc {
+
+}
+
+#btn1 {
+	padding: 20px 40px 20px 40px;
+	font-size: 16px;
+	color: white;
+}
+
+#btn2 {
+	padding: 20px 40px 20px 40px;
+	font-size: 16px;
+	color: white;
+}
+
+#btn3 {
+	padding: 20px 40px 20px 40px;
+	font-size: 16px;
+	color: white;
+}
