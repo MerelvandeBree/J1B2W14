@@ -1,0 +1,31 @@
+body {
+	margin: auto 0;
+	padding-left: 500px;
+	display: inline-block;
+	width: 425px;
+	background-color: blue;
+}
+
+#container {
+	background-color: black;
+    width: 425px;
+    margin: 0px auto;
+}
+
+#textInput {
+	padding: 30px;
+	padding-right: 80px;
+	width: auto;
+	color: white;
+}
+
+#input {
+	float: right;
+}
+
+#button {
+	position: fixed;
+	top: 47px;
+	left: 850px;
+}
+

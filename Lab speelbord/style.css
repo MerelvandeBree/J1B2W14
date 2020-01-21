@@ -1,0 +1,37 @@
+body{
+    background-color: grey;
+
+}
+
+#container{
+    background-color: yellow;
+    width: 800px;
+    margin: 0px auto;
+}
+
+.input{
+
+}
+
+form{
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+#blokje1, #blokje2, #blokje3, #blokje4, #blokje5{
+	font-size: 26px;
+	padding: 15px;
+	margin: 10px;
+	width: 30px;
+	height: 30px;
+	border: solid black 2px;
+	background-color: white; 
+	display: inline-block;
+}
+
+#woord{
+	text-align: center;
+	background-color: white;
+}
+
