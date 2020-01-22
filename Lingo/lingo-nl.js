@@ -488,17 +488,13 @@ var input = document.createElement("INPUT");
 var guessedArray = ["", "", "", "", ""];
 var correctArray = ["", "", "", "", ""];
 var correctWord = words[Math.floor(Math.random() * words.length)];
-var idcount = "1";
-
-
+var idCount = "1";
+var idFill = "1";
+var arrayCount = 0;
+var p = 1;
 // Container opmaak
 body.appendChild(container);
 container.id = "container";
-
-//id
-
-button.id = "button";
-
 
 // Balkje
 container.appendChild(textInput);
@@ -506,13 +502,12 @@ var textInputText = document.createTextNode("Word: ");
 textInput.appendChild(textInputText);
 textInput.id = "textInput"; 
 
-
 textInput.appendChild(input);
-// input.style.float = "right";
 input.id = "input";
 input.type = "text";
 
 // Knopje
+button.id = "button";
 var buttonText = document.createTextNode("Submit");
 textInput.appendChild(button);
 button.appendChild(buttonText);
@@ -521,6 +516,7 @@ document.body.appendChild(button);
 
 button.onclick = function(){
 	arrayUpload();
+	kleurtjes();
 }
 
 
@@ -529,8 +525,8 @@ function blokjeCreate(){
 	for (var i = 1; i <= 5; i++) {
 		var blokje = document.createElement("div");
 	    body.appendChild(blokje);
-		blokje.id = idcount;
-		idcount++;
+		blokje.id = idCount;
+		idCount++;
 	}
 }
 
@@ -565,6 +561,19 @@ function arrayUpload(){
 		guessedArray.push(guessedWord.charAt(i));
 	}
 	console.log(guessedArray);
+	for (var i = 0; i < 5; i++) {
+		if (idFill <= 25){
+			var blokjeFill = document.getElementById("" + idFill);
+			blokjeFill.innerHTML = guessedArray[arrayCount];
+			idFill++;
+			if (arrayCount <= 3){
+				arrayCount++;
+			}
+			else{
+				arrayCount = 0;
+			}
+		}
+	}
 }
 
 correctArrayFunction();
@@ -579,15 +588,41 @@ function correctArrayFunction(){
 
 // Kleurtjes
 function kleurtjes(){
-	if(correctArray[i] === guessedArray[i]){
-		document.getElementById(i+1).innerHTML = correctArray[i];
-		document.getElementById(i+1).style.backgroundColor = "green";
-		document.getElementById(i+1).style.borderRadius = "0%";
-		document.getElementById(i+1).classList.add("green");
 
+	for (var y = 0; y <= 4; y++) {
+		if(correctArray[y] == guessedArray[y]){
+			document.getElementById("" + p).style.backgroundColor = "green";
+			p++;
+			// document.getElementById(i+1).classList.add("green");
+		}
+		else{
+			p++;
+		}
+	}
+	function in code taal dat het rondje geel word
+
+
+ 
+	else{
+		for(var j = 0; j < correctWoord.length; j++){
+			if(raadWoord[j] == correctWoord[i] && raadWoord[i] !== correctWoord[i]){
+				if(document.getElementById("blokje" + (j+1)).classList.contains("green"))
+
+					continue;
+			
+
+				document.getElementById("blokje" + (j+1)).style.backgroundColor = "yellow";
+				document.getElementById("blokje" + (j+1)).style.borderRadius = "100%";
+				
+			}
+		else{
+
+			}
+		}
 	}
 }
 
+		
 
 
 
