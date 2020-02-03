@@ -482,18 +482,29 @@ var words = [
 // var
 var body = document.getElementsByTagName("BODY")[0];
 var container = document.createElement("div");
+var fullContainer = document.createElement("div");
 var button = document.createElement("BUTTON");
 var textInput = document.createElement("p");
 var input = document.createElement("INPUT");
 var guessedArray = ["", "", "", "", ""];
 var correctArray = ["", "", "", "", ""];
+var rightArray = ["", "", "", "", ""];
 var correctWord = words[Math.floor(Math.random() * words.length)];
+var guessedWord;
 var idCount = "1";
 var idFill = "1";
+var firstLetter = 1;
 var arrayCount = 0;
 var p = 1;
+var rowcount = 0;
+var guessAmount = 0;
+
+
 // Container opmaak
-body.appendChild(container);
+body.appendChild(fullContainer);
+fullContainer.id = "fullContainer";
+
+fullContainer.appendChild(container);
 container.id = "container";
 
 // Balkje
@@ -509,30 +520,59 @@ input.type = "text";
 // Knopje
 button.id = "button";
 var buttonText = document.createTextNode("Submit");
-textInput.appendChild(button);
 button.appendChild(buttonText);
-document.body.appendChild(button);
+container.appendChild(button);
 
-
+// 
 button.onclick = function(){
-	arrayUpload();
-	kleurtjes();
+	buttonClick();
 }
 
+function buttonClick() {
+	if (guessAmount != 4){
+		arrayUpload();
+		kleurtjes();
+		rowcount++;
+		setTimeout(function(){
+			if (correctWord == guessedWord){
+				alert("Je hebt gewonnen");
+		    	location.reload();
+			}
+		}, 500);
+	}
+	else if (guessAmount == 4) {
+		arrayUpload();
+		kleurtjes();
+		rowcount++;
+		setTimeout(function(){
+			if (correctWord == guessedWord){
+				alert("Je hebt gewonnen");
+				location.reload();
+			}
+		}, 500);
+		guessAmount++;
+		setTimeout(function(){
+			if (correctWord != guessedWord) {
+				alert("Je hebt verloren het goede woord was: " + correctWord);
+		    	location.reload();
+			}
+		}, 500);
+	}
+	guessAmount++;
+}
 
 
 function blokjeCreate(){
-	for (var i = 1; i <= 5; i++) {
+	for (var i = 1; i <= 25; i++) {
 		var blokje = document.createElement("div");
-	    body.appendChild(blokje);
+	    fullContainer.appendChild(blokje);
 		blokje.id = idCount;
 		idCount++;
+		blokje.innerHTML = "...";
 	}
 }
 
-for(var i = 0; i < 5; i++){
-	blokjeCreate();
-}
+blokjeCreate();
 style();
 
 function style(){
@@ -547,7 +587,6 @@ function style(){
 	    blokjestyle.style.border = "solid black 2px";
 	    blokjestyle.style.backgroundColor = "white";
 	    blokjestyle.style.display = "inline-block" ;
-
 	}
 }
 
@@ -556,7 +595,7 @@ console.log(correctWord);
 
 function arrayUpload(){
 	guessedArray = [];
-	var guessedWord = document.getElementById("input").value.toLowerCase();
+	guessedWord = document.getElementById("input").value.toLowerCase();
 	for (var i = 0; i < 5; i++) {
 		guessedArray.push(guessedWord.charAt(i));
 	}
@@ -577,56 +616,58 @@ function arrayUpload(){
 }
 
 correctArrayFunction();
+rightArrayFunction();
+
+for (var i = 0; i < 5; i++) {
+	var fillOne = document.getElementById("" + firstLetter);
+	fillOne.innerHTML = correctArray[0];
+	firstLetter = firstLetter + 5;
+}
 
 function correctArrayFunction(){
 	correctArray = [];
 	for (var i = 0; i < 5; i++) {
 		correctArray.push(correctWord.charAt(i));
 	}
-	console.log(correctArray);
+}
+
+function rightArrayFunction(){
+	rightArray = [];
+	for (var i = 0; i < 5; i++) {
+		rightArray.push(correctWord.charAt(i));
+	}
 }
 
 // Kleurtjes
 function kleurtjes(){
 
-	for (var y = 0; y <= 4; y++) {
+ 	for (var y = 0; y <= 4; y++) {
 		if(correctArray[y] == guessedArray[y]){
 			document.getElementById("" + p).style.backgroundColor = "green";
 			p++;
-			// document.getElementById(i+1).classList.add("green");
+			rightArray[y] = false;
 		}
 		else{
 			p++;
 		}
 	}
-	function in code taal dat het rondje geel word
 
-
- 
-	else{
-		for(var j = 0; j < correctWoord.length; j++){
-			if(raadWoord[j] == correctWoord[i] && raadWoord[i] !== correctWoord[i]){
-				if(document.getElementById("blokje" + (j+1)).classList.contains("green"))
-
-					continue;
-			
-
-				document.getElementById("blokje" + (j+1)).style.backgroundColor = "yellow";
-				document.getElementById("blokje" + (j+1)).style.borderRadius = "100%";
-				
-			}
-		else{
-
-			}
-		}
-	}
+    for(var j = 0; j < 5; j++){
+        for (var o = 0; o < 5; o++) {
+            if (rightArray[j] == guessedArray[o]){
+            	rightArray[j] = false;
+                document.getElementById("" + (o + 1 + (rowcount * 5))).style.backgroundColor = "yellow";
+                document.getElementById("" + (o + 1 + (rowcount * 5))).style.borderRadius = "50%";
+                console.log("" + (o + 1 + (rowcount * 5)));
+            }
+        }
+    }
+    rightArrayFunction();
 }
-
-		
-
-
-
-
-
+document.addEventListener('keydown', function(event){
+    if(event.keyCode === 13) {
+        buttonClick();
+    }        
+});
 
 
